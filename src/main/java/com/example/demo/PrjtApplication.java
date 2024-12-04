@@ -1,16 +1,22 @@
 package com.example.demo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+
+
 @Controller
 @SpringBootApplication
 public class PrjtApplication {
 	@Value("${file.uploadpath}")
 	String uploadPath;
+	private static final Logger logger = LoggerFactory.getLogger(PrjtApplication.class);
 	
 	public static void main(String[] args) {
 		SpringApplication.run(PrjtApplication.class, args);
@@ -18,6 +24,7 @@ public class PrjtApplication {
 	
 	@GetMapping("/")
 	public String main(Model model) {
+		logger.info("main");
 		model.addAttribute("upload",uploadPath);		
 		return "main";
 	}
